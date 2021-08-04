@@ -1,4 +1,4 @@
-#CeaiHack for osu!
+# CeaiHack for osu!
 
 CeaiHack cheat for osu!
 
