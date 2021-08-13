@@ -134,7 +134,7 @@ void ceaihack::cheat::ui::design::debug() {
 	ImGui::Text("Internal Clock: %lld", ceaihack::cheat::clock::get_current_time());
 
 	ImGui::Text("AudioEngine.Time = %i", ceaihack::cheat::memory::current_time.get());
-	ImGui::Text("GameBase.Time = %i", osu::gamebase::get_instance()->get_game_time());
+	ImGui::Text("GameBase.Time = %i", osu::gamebase::get_game_time());
 
 	ImGui::Text("Current game state - %i", ceaihack::cheat::memory::get_current_state());
 	ImGui::Text("IsPlayerLoaded - %i", ceaihack::cheat::memory::is_player_loaded());

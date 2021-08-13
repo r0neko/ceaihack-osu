@@ -55,7 +55,7 @@ float hit_object_manager::apply_mods_to_rate(double rate) {
 
 hit_object* hit_object_manager::get_current_object() {
 	if (hit_objects.is_valid()) {
-		auto time = osu::gamebase::get_instance()->get_time();
+		auto time = osu::gamebase::get_time();
 		auto preempt = calc_preempt_time();
 
 		for (int i = 0; i < hit_objects.length; i++) {

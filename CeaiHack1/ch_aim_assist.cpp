@@ -75,7 +75,7 @@ void ceaihack::cheat::features::aimassist::perform_aim_correction(player* player
 }
 
 void ceaihack::cheat::features::aimassist::perform_auto_aim(player* player, vector2_t pos) {
-	auto time = osu::gamebase::get_instance()->get_time();
+	auto time = osu::gamebase::get_time();
 	auto delta = abs(time - old_d_time);
 	auto objects = player->hom->hit_objects;
 
@@ -108,7 +108,7 @@ void ceaihack::cheat::features::aimassist::perform_auto_aim(player* player, vect
 			}
 		}
 	}
-	old_d_time = osu::gamebase::get_instance()->get_time();
+	old_d_time = osu::gamebase::get_time();
 }
 
 void __fastcall ceaihack::cheat::features::aimassist::set_cursor_position_hook(void* ecx, void* edx, vector2_t pos) {
