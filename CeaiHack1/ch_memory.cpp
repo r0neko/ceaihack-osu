@@ -44,6 +44,7 @@ void ceaihack::cheat::memory::init() {
 	ceaihack::memory::location::time_base = *(uintptr_t*)(search_pattern(ceaihack::cheat::signatures::time_signature, "xx????x????xxx????x") + 0x13);
 	ceaihack::memory::location::set_cursor_pos = (void*)(search_pattern(ceaihack::cheat::signatures::set_cursor_pos_signature, "xxxxxxx????x"));
 	ceaihack::memory::location::gb_time_base = *(uintptr_t*)(search_pattern(ceaihack::cheat::signatures::gamebase_time_signature, "x????xxxxxxxxxxxxxxx") + 0x14);
+	ceaihack::memory::location::gb_window_manager_base = *(uintptr_t*)(search_pattern(ceaihack::cheat::signatures::gamebase_windowmanager_signature, "xxx????xxx????xxx????xx") + 0x17);
 	//ceaihack::cheat::memory::hax_check_audio = (void*)(search_pattern(ceaihack::cheat::signatures::hax_check_audio_signature, "xxxxxx????xxxxx"));
 
 	ceaihack::cheat::memory::bass_handle = GetModuleHandle(L"bass.dll");

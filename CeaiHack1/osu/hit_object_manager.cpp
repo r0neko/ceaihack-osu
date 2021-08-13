@@ -17,6 +17,8 @@ hit_object_manager::hit_object_manager(uintptr_t base_address) {
 
 	if (*(uintptr_t*)(base + 0x48) != NULL)
 		hit_objects = make_memptr_list<hit_object>(*(uintptr_t*)(base + 0x48));
+
+	preempt = make_memptr_var<int>(base + 0x1C);
 }
 
 float hit_object_manager::apply_difficulty(float difficulty, float hr) {

@@ -20,6 +20,7 @@ namespace ceaihack::osu {
 		beatmap* beatmap;
 		memptr_var_obf<int> active_mods;
 		memptr_list<hit_object> hit_objects;
+		memptr_var<int> preempt;
 
 		float apply_difficulty(float difficulty, float hr = 1.3f);
 		float map_difficulty_range(float difficulty, float min, float mid, float max);

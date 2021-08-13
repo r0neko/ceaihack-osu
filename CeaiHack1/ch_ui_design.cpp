@@ -97,7 +97,7 @@ void ceaihack::cheat::ui::design::visuals() {
 	ImGui::Text("Unmod");
 	ImGui::PopFont();
 
-	ImGui::Checkbox("Remove Flashlight", &ceaihack::config::features::visuals::unmod::flashlight);
+	ImGui::Checkbox("AR Modifier", &ceaihack::config::features::game_modifiers::approach_rate::enabled);
 }
 
 void ceaihack::cheat::ui::design::aim_assist() {
@@ -138,6 +138,9 @@ void ceaihack::cheat::ui::design::debug() {
 
 	ImGui::Text("Current game state - %i", ceaihack::cheat::memory::get_current_state());
 	ImGui::Text("IsPlayerLoaded - %i", ceaihack::cheat::memory::is_player_loaded());
+
+	screen_t s = utils::get_screen();
+	ImGui::Text("Screen Resolution - %ix%i", s.width, s.height);
 	
 	if (ceaihack::osu::player::is_instance()) {
 		vector2_t pos = ceaihack::cheat::memory::get_cursor_position();
@@ -155,12 +158,7 @@ void ceaihack::cheat::ui::design::debug() {
 		ImGui::Text("Time Base - 0x%X", ceaihack::memory::location::time_base);
 		ImGui::Text("Player Addy - 0x%X", ceaihack::memory::location::player_base);
 		ImGui::Text("(static) GameBase.Time - 0x%X", ceaihack::memory::location::gb_time_base);
-		if (ceaihack::osu::player::is_instance()) {
-			ImGui::Text("Player Base - 0x%X", ceaihack::cheat::memory::get_player_base());
-			ImGui::Text("Ruleset Base - 0x%X", ceaihack::cheat::memory::get_ruleset_base());
-			ImGui::Text("Beatmap Base - 0x%X", ceaihack::cheat::memory::get_beatmap_base());
-			ImGui::Text("HitObjectManager Base - 0x%X", ceaihack::cheat::memory::get_hit_object_manager_base());
-		}
+		ImGui::Text("(static) GameBase.WindowManager - 0x%X", ceaihack::memory::location::gb_window_manager_base);
 	}
 
 	if (ImGui::Button("Unload CeaiHack")) {

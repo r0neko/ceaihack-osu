@@ -1,4 +1,6 @@
 #pragma once
+#include "ch_game_modifier.h"
+
 enum class ui_tabs {
 	timewarp,
 	relax,
@@ -28,6 +30,12 @@ namespace ceaihack::config {
 	namespace features::visuals {
 		namespace unmod {
 			inline bool flashlight = false;
+		}
+	}
+
+	namespace features::game_modifiers {
+		namespace approach_rate {
+			inline bool enabled = false;
 		}
 	}
 

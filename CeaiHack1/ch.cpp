@@ -33,6 +33,11 @@ DWORD WINAPI ceaihack::cheat::init(LPVOID lpParam) {
 
 	ceaihack::hooks::unload();
 
+	// close stdin, stdout and stderr to make the console close lol
+	fclose(stdin);
+	fclose(stdout);
+	fclose(stderr);
+
 	FreeConsole();
 	FreeLibraryAndExitThread(hModule, 0);
 

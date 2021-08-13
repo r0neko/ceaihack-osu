@@ -97,7 +97,7 @@ struct vector2_t {
         return sqrt(x_sqrd + y_sqrd);
     }
 
-    // r0neko too
+    // from kat
     inline vector2_t cos_interpolate_to(const vector2_t& transformation, float transformation_time) {
         auto c = (1 - cosf(transformation_time * M_PI)) / 2;
 
@@ -106,6 +106,18 @@ struct vector2_t {
 
         return *this;
     }
+
+    // from kat again
+    /*static float hermite(float a, float a_tangent, float b, float b_tangent, float t) {
+        float num = powf(t, 2);
+        float num2 = t * num;
+        float num3 = 2f * num2 - 3f * num + 1f;
+        float num4 = -2f * num2 + 3f * num;
+        float num5 = num2 - 2f * num + t;
+        float num6 = num2 - num;
+
+        return a * num3 + b * num4 + a_tangent * num5 + b_tangent * num6;
+    }*/
 
     inline float length_squared() const {
         return this->x * this->x + this->y * this->y;

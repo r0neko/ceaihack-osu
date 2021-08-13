@@ -6,6 +6,7 @@ namespace ceaihack::memory::location {
     inline uintptr_t player_base;
     inline uintptr_t time_base;
     inline uintptr_t gb_time_base;
+    inline uintptr_t gb_window_manager_base;
 
     inline void* set_rate;
     inline void* update_playback_rate;
