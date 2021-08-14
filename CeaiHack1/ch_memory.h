@@ -72,4 +72,7 @@ namespace ceaihack::cheat::memory {
     uintptr_t get_hit_object_manager_base();
 
     inline ceaihack::utils::memptr_var<int> current_time;
+
+    uintptr_t search_pattern(const char* pattern, const char* mask);
+    void dmp_mem_regions();
 }

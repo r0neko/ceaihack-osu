@@ -98,6 +98,7 @@ void ceaihack::cheat::ui::design::visuals() {
 	ImGui::PopFont();
 
 	ImGui::Checkbox("AR Modifier", &ceaihack::config::features::game_modifiers::approach_rate::enabled);
+	ImGui::SliderFloat("AR", &config::features::game_modifiers::approach_rate::new_value, -15.0f, 15);
 }
 
 void ceaihack::cheat::ui::design::aim_assist() {

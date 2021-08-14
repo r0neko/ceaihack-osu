@@ -25,10 +25,10 @@ DWORD WINAPI ceaihack::cheat::init(LPVOID lpParam) {
 	ceaihack::cheat::memory::init();
 	ceaihack::hooks::init();
 	ceaihack::cheat::auth::init();
+	ceaihack::cheat::features::game_modifier::init();
 
 	while (ceaihack::config::is_running) {
-		/*ceaihack::cheat::features::game_modifier::update();
-		Sleep(15);*/
+		ceaihack::cheat::features::game_modifier::update();
 	}
 
 	ceaihack::hooks::unload();

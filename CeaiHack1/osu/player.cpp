@@ -36,9 +36,9 @@ player::player(uintptr_t player_address) {
 float player::get_object_radius() {
 	if (hom == nullptr) return 1;
 
-	float width = 512 * get_window_ratio();
+	float width = 512.0f * get_window_ratio();
 	float difficulty = hom->apply_difficulty(hom->beatmap->circle_size.get());
 
 	float sprite_display_size = (width / 8 * (1 - 0.7f * ((difficulty - 5) / 5)));
-	return sprite_display_size / 2 / get_window_ratio() * 1.00041f;
+	return sprite_display_size / 2.0f / get_window_ratio() * 1.00041f;
 }

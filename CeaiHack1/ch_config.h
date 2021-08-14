@@ -36,6 +36,7 @@ namespace ceaihack::config {
 	namespace features::game_modifiers {
 		namespace approach_rate {
 			inline bool enabled = false;
+			inline float new_value = 3.0f;
 		}
 	}
 

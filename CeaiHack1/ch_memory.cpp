@@ -266,7 +266,7 @@ void ceaihack::cheat::memory::set_cursor_position(float x, float y) {
 	set_cursor_position(v);
 }
 
-void dmp_mem_regions() {
+void ceaihack::cheat::memory::dmp_mem_regions() {
 	memoryRegions.clear();
 
 	MEMORY_BASIC_INFORMATION32 mbi;
@@ -282,7 +282,7 @@ void dmp_mem_regions() {
 	}
 }
 
-uintptr_t search_pattern(const char* pattern, const char* mask) {
+uintptr_t ceaihack::cheat::memory::search_pattern(const char* pattern, const char* mask) {
 	for (const auto& region : memoryRegions)
 	{
 		size_t patternLength = strlen(mask);

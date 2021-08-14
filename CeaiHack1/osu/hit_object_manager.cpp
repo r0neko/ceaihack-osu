@@ -31,7 +31,7 @@ float hit_object_manager::apply_difficulty(float difficulty, float hr) {
 }
 
 float hit_object_manager::calc_preempt_time() {
-	return map_difficulty_range(beatmap->approach_rate.get() , 1800, 1200, 450);
+	return map_difficulty_range(beatmap->approach_rate.get(), 1800, 1200, 450);
 }
 
 float hit_object_manager::map_difficulty_range(float difficulty, float min, float mid, float max)
