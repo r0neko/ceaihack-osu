@@ -44,12 +44,9 @@ void ceaihack::cheat::features::game_modifier::update() {
 			ceaihack::logger::features->info("Patched the AR getter!");
 		}
 	} else {
-		for (int i = 0; i < 6; i++) {
-			if (preempt_code[i] != (BYTE) original_preempt_code[i]) {
-				memcpy(preempt_code, (BYTE*) original_preempt_code, 6);
-				ceaihack::logger::features->info("Restored Original AR Getter!");
-				break;
-			}
+		if (memcmp(preempt_code, (BYTE*)original_preempt_code, 6) != 0) {
+			memcpy(preempt_code, (BYTE*)original_preempt_code, 6);
+			ceaihack::logger::features->info("Restored Original AR Getter!");
 		}
 	}
 }
