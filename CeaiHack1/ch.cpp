@@ -12,6 +12,7 @@
 #include "./osu/osu.h"
 
 #include "ch_game_modifier.h"
+#include "ch_timewarp.h"
 
 DWORD WINAPI ceaihack::cheat::init(LPVOID lpParam) {
 	ceaihack::logger::init();
@@ -25,13 +26,20 @@ DWORD WINAPI ceaihack::cheat::init(LPVOID lpParam) {
 	ceaihack::cheat::memory::init();
 	ceaihack::hooks::init();
 	ceaihack::cheat::auth::init();
+
+	// init features
 	ceaihack::cheat::features::game_modifier::init();
+	ceaihack::cheat::features::timewarp::init();
 
 	while (ceaihack::config::is_running) {
+		ceaihack::cheat::features::timewarp::update();
 		ceaihack::cheat::features::game_modifier::update();
 	}
 
+	// unload features
 	ceaihack::cheat::features::game_modifier::unload();
+	ceaihack::cheat::features::timewarp::unload();
+
 	ceaihack::hooks::unload();
 
 	// close stdin, stdout and stderr to make the console close lol
