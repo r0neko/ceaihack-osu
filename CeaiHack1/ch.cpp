@@ -31,6 +31,7 @@ DWORD WINAPI ceaihack::cheat::init(LPVOID lpParam) {
 		ceaihack::cheat::features::game_modifier::update();
 	}
 
+	ceaihack::cheat::features::game_modifier::unload();
 	ceaihack::hooks::unload();
 
 	// close stdin, stdout and stderr to make the console close lol
