@@ -98,7 +98,10 @@ void ceaihack::cheat::ui::design::visuals() {
 	ImGui::PopFont();
 
 	ImGui::Checkbox("AR Modifier", &ceaihack::config::features::game_modifiers::approach_rate::enabled);
-	ImGui::SliderFloat("AR", &config::features::game_modifiers::approach_rate::new_value, -15.0f, 15);
+	ImGui::SliderFloat("AR", &config::features::game_modifiers::approach_rate::new_value, 0, 15);
+
+	ImGui::Checkbox("CS Modifier", &ceaihack::config::features::game_modifiers::circle_size::enabled);
+	ImGui::SliderFloat("CS", &config::features::game_modifiers::circle_size::new_value, 0, 10);
 }
 
 void ceaihack::cheat::ui::design::aim_assist() {

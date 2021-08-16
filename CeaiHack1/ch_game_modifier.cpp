@@ -9,30 +9,40 @@
 
 uintptr_t hom_update_variables_addy = NULL;
 
-constexpr auto original_preempt_code = "\xDD\x5D\xE0\xDD\x45\xE0";
+constexpr auto original_code = "\xDD\x5D\xE0\xDD\x45\xE0"; // it's the same lol
 
 void ceaihack::cheat::features::game_modifier::init() {
 	hom_update_variables_addy = ceaihack::cheat::memory::search_pattern(ceaihack::cheat::signatures::hom_update_variables_signature, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 	printf("GMod: HitObjectManager::UpdateVariables @ %08X\n", hom_update_variables_addy);
 }
 
-void patch_preempt() {
-	// ar changer aka preempt modifier
-	uintptr_t preempt_code_location = hom_update_variables_addy + 0x1A7;
+// the shit is so common so i'll just make a function that does it automatically
+void patcher(uintptr_t offset, bool enabled, void* value) {
+	uintptr_t location = hom_update_variables_addy + offset;
 
-	if (ceaihack::config::features::game_modifiers::approach_rate::enabled) {
-		if (*(uint16_t*)(preempt_code_location) != 0x05D9) {
-			*(uint16_t*)(preempt_code_location) = 0x05D9;
-			*(uintptr_t*)(preempt_code_location + 0x2) = (uintptr_t)&ceaihack::config::features::game_modifiers::approach_rate::new_value;
-			ceaihack::logger::features->info("Patched the AR getter!");
+	if (enabled) {
+		if (*(uint16_t*)(location) != 0x05D9) {
+			*(uint16_t*)(location) = 0x05D9;
+			*(uintptr_t*)(location + 0x2) = (uintptr_t) value;
+			ceaihack::logger::features->info("Patched code in memory at {0:X}!", location);
 		}
 	}
 	else {
-		if (memcmp((BYTE*) preempt_code_location, (BYTE*) original_preempt_code, 6) != 0) {
-			memcpy((BYTE*) preempt_code_location, (BYTE*) original_preempt_code, 6);
-			ceaihack::logger::features->info("Restored Original AR Getter!");
+		if (memcmp((BYTE*)location, (BYTE*)original_code, 6) != 0) {
+			memcpy((BYTE*)location, (BYTE*)original_code, 6);
+			ceaihack::logger::features->info("Restored original code in memory at {0:X}!", location);
 		}
 	}
+}
+
+void patch_preempt() {
+	// ar changer aka preempt modifier
+	patcher(0x1A7, ceaihack::config::features::game_modifiers::approach_rate::enabled, &ceaihack::config::features::game_modifiers::approach_rate::new_value);
+}
+
+void patch_sprite_display_size() {
+	// cs changer aka spritedisplaysize modifier
+	patcher(0x210, ceaihack::config::features::game_modifiers::circle_size::enabled, &ceaihack::config::features::game_modifiers::circle_size::new_value);
 }
 
 void ceaihack::cheat::features::game_modifier::update() {
@@ -51,12 +61,15 @@ void ceaihack::cheat::features::game_modifier::update() {
 
 	// now let the fun begin!
 	patch_preempt();
+	patch_sprite_display_size();
 }
 
 void ceaihack::cheat::features::game_modifier::unload() {
 	// disable stuff
 	config::features::game_modifiers::approach_rate::enabled = false;
+	config::features::game_modifiers::circle_size::enabled = false;
 
 	// call patchers one more time(yes, lazy).
 	patch_preempt();
+	patch_sprite_display_size();
 }

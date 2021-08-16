@@ -38,6 +38,11 @@ namespace ceaihack::config {
 			inline bool enabled = false;
 			inline float new_value = 3.0f;
 		}
+
+		namespace circle_size {
+			inline bool enabled = false;
+			inline float new_value = 5.0f;
+		}
 	}
 
 	namespace features::aimassist {
