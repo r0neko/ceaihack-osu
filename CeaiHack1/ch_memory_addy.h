@@ -11,4 +11,6 @@ namespace ceaihack::memory::location {
     inline void* set_rate;
     inline void* update_playback_rate;
     inline void* set_cursor_pos;
+    inline void* check_flashlight_hax;
+    inline void* update_flashlight;
 }

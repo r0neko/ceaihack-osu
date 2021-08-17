@@ -7,6 +7,7 @@
 // features
 #include "ch_timewarp.h"
 #include "ch_aim_assist.h"
+#include "ch_unmod_fl.h"
 
 #include "MinHook.h"
 #include <iostream>
@@ -30,6 +31,10 @@ bool ceaihack::hooks::init() {
 	if (MH_CreateHook(reinterpret_cast<void*>(ceaihack::memory::location::set_cursor_pos), reinterpret_cast<void*>(&ceaihack::cheat::features::aimassist::set_cursor_position_hook), reinterpret_cast<void**>(&ceaihack::hooks::variables::o_set_cursor_position)) != MH_OK) {
 		ceaihack::logger::cheat->error("Failed to hook set_MousePosition!");
 	}
+
+	/*if (MH_CreateHook(reinterpret_cast<void*>(ceaihack::memory::location::check_flashlight_hax), reinterpret_cast<void*>(&ceaihack::cheat::features::unmod::flashlight::check_flashlight_hax_hook), reinterpret_cast<void**>(&ceaihack::hooks::variables::o_check_flashlight_hax)) != MH_OK) {
+		ceaihack::logger::cheat->error("Failed to hook Player.checkFlashlightHax!");
+	}*/
 
 	/*std::cout << "[i] hooking Player::HaxCheckAudio..." << std::endl;
 	if (MH_CreateHook(reinterpret_cast<void*>(ceaihack::memory::location::hax_check_audio), reinterpret_cast<void*>(&ceaihack::cheat::features::timewarp::hax_check_audio_hook), reinterpret_cast<void**>(&ceaihack::hooks::variables::o_hax_check_audio)) != MH_OK) {

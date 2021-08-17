@@ -66,6 +66,12 @@
     <Filter Include="Features\Game Modifier">
       <UniqueIdentifier>{e7bc69d6-a301-45d2-8623-7bdee8ac319f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="osu!\Ruleset">
+      <UniqueIdentifier>{14b9a634-34b2-477f-9e3d-d1d69f6445fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="osu!\SpriteManager">
+      <UniqueIdentifier>{e2bce14e-8784-42db-b44a-d91198bbfebe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CeaiHackMain.cpp">
@@ -145,6 +151,15 @@
     </ClCompile>
     <ClCompile Include="ch_game_modifier.cpp">
       <Filter>Features\Game Modifier</Filter>
+    </ClCompile>
+    <ClCompile Include="ch_unmod_fl.cpp">
+      <Filter>Features\Game Modifier</Filter>
+    </ClCompile>
+    <ClCompile Include="osu\ruleset.cpp">
+      <Filter>osu!\Ruleset</Filter>
+    </ClCompile>
+    <ClCompile Include="osu\sprite_manager.cpp">
+      <Filter>osu!\SpriteManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -273,6 +288,15 @@
     </ClInclude>
     <ClInclude Include="ch_game_modifier.h">
       <Filter>Features\Game Modifier</Filter>
+    </ClInclude>
+    <ClInclude Include="ch_unmod_fl.h">
+      <Filter>Features\Game Modifier</Filter>
+    </ClInclude>
+    <ClInclude Include="osu\ruleset.h">
+      <Filter>osu!\Ruleset</Filter>
+    </ClInclude>
+    <ClInclude Include="osu\sprite_manager.h">
+      <Filter>osu!\SpriteManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

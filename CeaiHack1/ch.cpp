@@ -13,6 +13,7 @@
 
 #include "ch_game_modifier.h"
 #include "ch_timewarp.h"
+#include "ch_unmod_fl.h"
 
 DWORD WINAPI ceaihack::cheat::init(LPVOID lpParam) {
 	ceaihack::logger::init();
@@ -34,6 +35,7 @@ DWORD WINAPI ceaihack::cheat::init(LPVOID lpParam) {
 	while (ceaihack::config::is_running) {
 		ceaihack::cheat::features::timewarp::update();
 		ceaihack::cheat::features::game_modifier::update();
+		ceaihack::cheat::features::unmod::flashlight::update();
 	}
 
 	// unload features

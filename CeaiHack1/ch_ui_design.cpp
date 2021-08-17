@@ -97,6 +97,8 @@ void ceaihack::cheat::ui::design::visuals() {
 	ImGui::Text("Unmod");
 	ImGui::PopFont();
 
+	ImGui::Checkbox("Unmod Flashlight", &ceaihack::config::features::game_modifiers::unmod::flashlight);
+
 	ImGui::Checkbox("AR Modifier", &ceaihack::config::features::game_modifiers::approach_rate::enabled);
 	ImGui::SliderFloat("AR", &config::features::game_modifiers::approach_rate::new_value, 0, 15);
 

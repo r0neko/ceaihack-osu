@@ -28,9 +28,8 @@ player::player(uintptr_t player_address) {
 	if (base == NULL) return;
 
 	hom = new ceaihack::osu::hit_object_manager(*(uintptr_t*)(base + 0x40));
+	// ruleset = new ceaihack::osu::ruleset(*(uintptr_t*)(base + 0x40));
 	fl_check = make_memptr_var<bool>(base + 0x186);
-
-	//hit_object_manager = std::make_unique<ceaihack::osu::hit_object_manager>(*(uintptr_t*) (base + 0x40));
 }
 
 float player::get_object_radius() {

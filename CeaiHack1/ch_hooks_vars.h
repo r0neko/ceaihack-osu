@@ -10,6 +10,8 @@ namespace ceaihack::hooks::variables {
 	typedef void(__fastcall* update_playback_rate_t)(void* ecx, void* edx);
 
 	typedef void(__fastcall* set_cursor_position_t)(void* ecx, void* edx, vector2_t pos);
+	typedef void(__fastcall* check_flashlight_hax_t)(void* ecx, void* edx);
+	typedef void(__fastcall* update_flashlight_t)();
 
 	// variables
 	inline HMODULE opengl_lib;
@@ -21,4 +23,6 @@ namespace ceaihack::hooks::variables {
 	inline update_playback_rate_t o_update_playback_rate = nullptr;
 
 	inline set_cursor_position_t o_set_cursor_position = nullptr;
+	inline check_flashlight_hax_t o_check_flashlight_hax = nullptr;
+	inline update_flashlight_t o_update_flashlight = nullptr;
 }

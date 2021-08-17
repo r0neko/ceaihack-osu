@@ -3,6 +3,7 @@
 #include <memory>
 
 #include "beatmap.h"
+#include "ruleset.h"
 #include "hit_object_manager.h"
 #include "memptr_var.h"
 
@@ -15,6 +16,7 @@ namespace ceaihack::osu {
 		~player() {}
 
 		hit_object_manager* hom;
+		ruleset* ruleset;
 		memptr_var<bool> fl_check;
 
 		float get_object_radius();

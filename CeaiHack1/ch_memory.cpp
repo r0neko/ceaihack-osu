@@ -38,7 +38,7 @@ void ceaihack::cheat::memory::init() {
 	dmp_mem_regions();
 	ceaihack::memory::location::state_base = *(uintptr_t*) (search_pattern(ceaihack::cheat::signatures::state_signature, "xxxx????x????x????x") + 0x13);
 	ceaihack::memory::location::player_base = *(uintptr_t*) (search_pattern(ceaihack::cheat::signatures::player_signature, "xxxxxxx") + 0x7);
-	ceaihack::memory::location::set_rate = (void*) (search_pattern(ceaihack::cheat::signatures::set_current_playback_rate_signature, "xxxxxx????xxxxx"));
+	ceaihack::memory::location::set_rate = (void*) search_pattern(ceaihack::cheat::signatures::set_current_playback_rate_signature, "xxxxxx????xxxxx");
 	ceaihack::memory::location::update_playback_rate = (void*)(search_pattern(ceaihack::cheat::signatures::update_playback_rate_signature, "xxxxxxxxxxxxxxxx"));
 	ceaihack::cheat::memory::get_audio_stream = (get_audio_stream_t) search_pattern(ceaihack::cheat::signatures::get_audio_stream_signature, "xxxx");
 	ceaihack::memory::location::time_base = *(uintptr_t*)(search_pattern(ceaihack::cheat::signatures::time_signature, "xx????x????xxx????x") + 0x13);
