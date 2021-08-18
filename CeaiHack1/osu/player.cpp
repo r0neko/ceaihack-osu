@@ -28,7 +28,7 @@ player::player(uintptr_t player_address) {
 	if (base == NULL) return;
 
 	hom = new ceaihack::osu::hit_object_manager(*(uintptr_t*)(base + 0x40));
-	// ruleset = new ceaihack::osu::ruleset(*(uintptr_t*)(base + 0x40));
+	ruleset = new ceaihack::osu::ruleset(*(uintptr_t*)(base + 0x60));
 	fl_check = make_memptr_var<bool>(base + 0x186);
 }
 

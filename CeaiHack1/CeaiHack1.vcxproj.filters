@@ -69,8 +69,11 @@
     <Filter Include="osu!\Ruleset">
       <UniqueIdentifier>{14b9a634-34b2-477f-9e3d-d1d69f6445fd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="osu!\SpriteManager">
+    <Filter Include="osu!\Sprite">
       <UniqueIdentifier>{e2bce14e-8784-42db-b44a-d91198bbfebe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="osu!\SpriteManager">
+      <UniqueIdentifier>{4779534d-3e96-4670-89b7-f527886d7fd1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +160,9 @@
     </ClCompile>
     <ClCompile Include="osu\ruleset.cpp">
       <Filter>osu!\Ruleset</Filter>
+    </ClCompile>
+    <ClCompile Include="osu\sprite.cpp">
+      <Filter>osu!\Sprite</Filter>
     </ClCompile>
     <ClCompile Include="osu\sprite_manager.cpp">
       <Filter>osu!\SpriteManager</Filter>
@@ -294,6 +300,9 @@
     </ClInclude>
     <ClInclude Include="osu\ruleset.h">
       <Filter>osu!\Ruleset</Filter>
+    </ClInclude>
+    <ClInclude Include="osu\sprite.h">
+      <Filter>osu!\Sprite</Filter>
     </ClInclude>
     <ClInclude Include="osu\sprite_manager.h">
       <Filter>osu!\SpriteManager</Filter>

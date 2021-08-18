@@ -11,7 +11,7 @@ namespace ceaihack::hooks::variables {
 
 	typedef void(__fastcall* set_cursor_position_t)(void* ecx, void* edx, vector2_t pos);
 	typedef void(__fastcall* check_flashlight_hax_t)(void* ecx, void* edx);
-	typedef void(__fastcall* update_flashlight_t)();
+	typedef void(__fastcall* update_flashlight_t)(void* ecx, void* edx);
 
 	// variables
 	inline HMODULE opengl_lib;

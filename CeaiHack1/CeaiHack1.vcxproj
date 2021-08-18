@@ -195,8 +195,9 @@
     <ClCompile Include="osu\hit_object.cpp" />
     <ClCompile Include="osu\hit_object_manager.cpp" />
     <ClCompile Include="osu\player.cpp" />
-    <ClCompile Include="osu\sprite_manager.cpp" />
+    <ClCompile Include="osu\sprite.cpp" />
     <ClCompile Include="osu\ruleset.cpp" />
+    <ClCompile Include="osu\sprite_manager.cpp" />
     <ClCompile Include="reflection\app_domain\ch_app_domain.cpp" />
     <ClCompile Include="reflection\assembly\ch_assembly.cpp" />
     <ClCompile Include="reflection\ch_reflection.cpp" />
@@ -238,9 +239,10 @@
     <ClInclude Include="osu\osu_memory.h" />
     <ClInclude Include="osu\player.h" />
     <ClInclude Include="osu\modes.h" />
-    <ClInclude Include="osu\sprite_manager.h" />
+    <ClInclude Include="osu\sprite.h" />
     <ClInclude Include="osu\ruleset.h" />
     <ClInclude Include="osu\rulesets.h" />
+    <ClInclude Include="osu\sprite_manager.h" />
     <ClInclude Include="osu\value_obfuscator.h" />
     <ClInclude Include="osu\window_utils.h" />
     <ClInclude Include="reflection\app_domain\ch_app_domain.h" />

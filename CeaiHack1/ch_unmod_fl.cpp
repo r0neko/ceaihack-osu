@@ -19,7 +19,7 @@ void ceaihack::cheat::features::unmod::flashlight::update() {
 			ceaihack::memory::location::check_flashlight_hax = (void*)ceaihack::cheat::memory::search_pattern(ceaihack::cheat::signatures::player_check_flashlight_hax_signature, "xxxxxxxxxxxxx????xxxxx????xxx");
 
 		if (ceaihack::memory::location::update_flashlight == NULL)
-			ceaihack::memory::location::update_flashlight = (void*) ceaihack::cheat::memory::search_pattern(ceaihack::cheat::signatures::ruleset_update_flashlight_signature, "xxxxxxxxxxx");
+			ceaihack::memory::location::update_flashlight = (void*) ceaihack::cheat::memory::search_pattern(ceaihack::cheat::signatures::ruleset_osu_update_flashlight_signature, "xxxxxxxxxxx");
 
 		printf("FL: CheckFlashlightHax @ %08x\n", (uintptr_t) ceaihack::memory::location::check_flashlight_hax);
 		printf("FL: UpdateFlashlight @ %08x\n", (uintptr_t)ceaihack::memory::location::update_flashlight);
@@ -48,22 +48,22 @@ void ceaihack::cheat::features::unmod::flashlight::update() {
 	}
 }
 
-void __fastcall ceaihack::cheat::features::unmod::flashlight::update_flashlight_hook() {
-	ceaihack::logger::features->info("FLUnmod: UpdateFlashlight hook called!");
-
+void __fastcall ceaihack::cheat::features::unmod::flashlight::update_flashlight_hook(void* ecx, void* edx) {
 	// fl unmod code happens here
-	//if (ceaihack::osu::player::is_instance()) {
-	//	auto player = ceaihack::osu::player::instance();
-	//	//if (player->ruleset != nullptr && player->ruleset->sprite_manager_flashlight != nullptr)
-	//		//player->ruleset->sprite_manager_flashlight->alpha = ceaihack::config::features::game_modifiers::unmod::flashlight ? 0.0f : 1.0f;
-	//}
+	if (ceaihack::osu::player::is_instance()) {
+		auto player = ceaihack::osu::player::instance();
 
-	//if (!ceaihack::config::features::game_modifiers::unmod::flashlight)
-		//ceaihack::hooks::variables::o_update_flashlight(); // fuck it we won't call the original function when the unmod is enabled. easy bypass (part 2) lol
+
+		if (player->ruleset != nullptr && player->ruleset->sprite_manager_flashlight != nullptr) {
+			player->ruleset->sprite_manager_flashlight->alpha = (float) !ceaihack::config::features::game_modifiers::unmod::flashlight; // lazy lol just convert bool to float easy deal!
+		}
+	}
+
+	if (!ceaihack::config::features::game_modifiers::unmod::flashlight)
+		ceaihack::hooks::variables::o_update_flashlight(ecx, edx); // fuck it we won't call the original function when the unmod is enabled. easy bypass (part 2) lol
 }
 
 void __fastcall ceaihack::cheat::features::unmod::flashlight::check_flashlight_hax_hook(void* ecx, void* edx) {
-	ceaihack::logger::features->info("FLUnmod: checkFlashlightHax hook called!");
 	if (!ceaihack::config::features::game_modifiers::unmod::flashlight)
 		ceaihack::hooks::variables::o_check_flashlight_hax(ecx, edx); // fuck it we won't call the original function when the unmod is enabled. easy bypass (part 1) lol
 }
