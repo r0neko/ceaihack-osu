@@ -99,7 +99,7 @@ struct vector2_t {
 
     // from kat
     inline vector2_t cos_interpolate_to(const vector2_t& transformation, float transformation_time) {
-        auto c = (1 - cosf(transformation_time * M_PI)) / 2;
+        auto c = (1 - cosf(transformation_time * (float)M_PI)) / 2;
 
         this->x = this->x * (1 - c) + (transformation.x * c);
         this->y = this->y * (1 - c) + (transformation.y * c);

@@ -13,7 +13,10 @@ constexpr auto original_code = "\xDD\x5D\xE0\xDD\x45\xE0"; // it's the same lol
 
 void ceaihack::cheat::features::game_modifier::init() {
 	hom_update_variables_addy = ceaihack::cheat::memory::search_pattern(ceaihack::cheat::signatures::hom_update_variables_signature, "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+
+#ifdef DEBUG
 	printf("GMod: HitObjectManager::UpdateVariables @ %08X\n", hom_update_variables_addy);
+#endif
 }
 
 // the shit is so common so i'll just make a function that does it automatically

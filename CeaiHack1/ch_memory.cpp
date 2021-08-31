@@ -137,7 +137,7 @@ vector2_t ceaihack::cheat::memory::get_gamefield_origin() {
 
 float map_difficulty_range(float difficulty, float min, float mid, float max)
 {
-	auto d = apply_difficulty(difficulty, 1.4);
+	auto d = apply_difficulty(difficulty, 1.4f);
 
 	if (d > 5)
 		return mid + (max - mid) * (d - 5) / 5;
@@ -157,7 +157,7 @@ bool ceaihack::cheat::memory::get_current_beatmap_object(hit_object_t* current_o
 		auto preempt = calc_preempt_time();
 
 		if (objects.size() > 0) {
-			for (int i = 0; i < objects.size(); i++) {
+			for (unsigned int i = 0; i < objects.size(); i++) {
 				if (time > (objects[i].start - preempt) && time < objects[i].end) {
 					*current_object = objects[i];
 					return true;
@@ -206,7 +206,9 @@ std::vector<hit_object_t> ceaihack::cheat::memory::get_beatmap_objects() {
 	if (is_hit_object_manager_loaded()) {
 		uintptr_t hit_object_list_ptr = *(uintptr_t*)(get_hit_object_manager_base() + 0x48);
 		if (hit_object_list_ptr != NULL) {
+#ifdef _DEBUG
 			printf("hit object beatmap addy: %08X\n", hit_object_list_ptr);
+#endif
 
 			int length = *(int*)(hit_object_list_ptr + 0xc);
 			uintptr_t list_ptr = *(uintptr_t*)(hit_object_list_ptr + 0x4);
@@ -223,7 +225,7 @@ std::vector<hit_object_t> ceaihack::cheat::memory::get_beatmap_objects() {
 					current_object.position.x = *(float*)(hit_object_ptr + 0x38);
 					current_object.position.y = *(float*)(hit_object_ptr + 0x3C);
 
-					if ((int)current_object.type & (int)object_type_e::circle > 0) {
+					if (((int)current_object.type & (int)object_type_e::circle) > 0) {
 						current_object.end = current_object.start + 10;
 					}
 

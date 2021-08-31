@@ -27,7 +27,7 @@ namespace ceaihack::osu {
 		float calc_preempt_time();
 		float apply_mods_to_rate(double rate);
 
-		hit_object* get_current_object();
+		hit_object get_current_object();
 
 		ruleset_e game_mode = ruleset_e::standard;
 	private:

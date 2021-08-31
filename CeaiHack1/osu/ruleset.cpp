@@ -6,7 +6,9 @@ using namespace ceaihack::osu;
 ruleset::ruleset(uintptr_t base_address) {
 	base = base_address;
 
+#ifdef _DEBUG
 	printf("Ruleset @ %08X\n", base);
+#endif
 
 	if (base == NULL) return;
 

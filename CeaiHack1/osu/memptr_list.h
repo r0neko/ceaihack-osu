@@ -26,6 +26,8 @@ namespace ceaihack::utils {
 				if (type_ptr != NULL)
 					return T(type_ptr);
 			}
+
+			return T(0);
 		}
 
 		int length = 0;

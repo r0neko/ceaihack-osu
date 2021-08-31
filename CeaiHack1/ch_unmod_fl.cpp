@@ -21,8 +21,10 @@ void ceaihack::cheat::features::unmod::flashlight::update() {
 		if (ceaihack::memory::location::update_flashlight == NULL)
 			ceaihack::memory::location::update_flashlight = (void*) ceaihack::cheat::memory::search_pattern(ceaihack::cheat::signatures::ruleset_osu_update_flashlight_signature, "xxxxxxxxxxx");
 
+#ifdef _DEBUG
 		printf("FL: CheckFlashlightHax @ %08x\n", (uintptr_t) ceaihack::memory::location::check_flashlight_hax);
 		printf("FL: UpdateFlashlight @ %08x\n", (uintptr_t)ceaihack::memory::location::update_flashlight);
+#endif
 	}
 
 	// hook checkFlashlightHax

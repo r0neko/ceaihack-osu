@@ -67,7 +67,7 @@ void ceaihack::cheat::ui::design::header() {
 		ImGui::Text("CeaiHack");
 		ImGui::PopFont();
 
-		ImGui::SameLine(0, -0.4);
+		ImGui::SameLine(0.f, -0.4f);
 
 		ImGui::Text("for osu!");
 
@@ -89,7 +89,7 @@ void ceaihack::cheat::ui::design::timewarp() {
 	ImGui::Checkbox("Enable Timewarp", &ceaihack::config::features::timewarp::enabled);
 
 	if (ceaihack::config::features::timewarp::enabled)
-		ImGui::SliderFloat("Timewarp rate", &ceaihack::config::features::timewarp::rate, 0.2f, 1.5f);
+		ImGui::SliderFloat("Timewarp rate", &ceaihack::config::features::timewarp::rate, 0.2f, 1.5f, "%.1f", 0.1f);
 }
 
 void ceaihack::cheat::ui::design::visuals() {
@@ -100,10 +100,10 @@ void ceaihack::cheat::ui::design::visuals() {
 	ImGui::Checkbox("Unmod Flashlight", &ceaihack::config::features::game_modifiers::unmod::flashlight);
 
 	ImGui::Checkbox("AR Modifier", &ceaihack::config::features::game_modifiers::approach_rate::enabled);
-	ImGui::SliderFloat("AR", &config::features::game_modifiers::approach_rate::new_value, 0, 15);
+	ImGui::SliderFloat("AR", &config::features::game_modifiers::approach_rate::new_value, 0, 15, "%.1f", 0.5f);
 
 	ImGui::Checkbox("CS Modifier", &ceaihack::config::features::game_modifiers::circle_size::enabled);
-	ImGui::SliderFloat("CS", &config::features::game_modifiers::circle_size::new_value, 0, 10);
+	ImGui::SliderFloat("CS", &config::features::game_modifiers::circle_size::new_value, 0, 10, "%.1f", 0.5f);
 }
 
 void ceaihack::cheat::ui::design::aim_assist() {
@@ -116,14 +116,14 @@ void ceaihack::cheat::ui::design::aim_assist() {
 	if (ceaihack::config::features::aimassist::enabled) {
 		ImGui::Checkbox("Auto-Aim (NOT RECOMMENDED!)", &ceaihack::config::features::aimassist::auto_aim);
 		if (!ceaihack::config::features::aimassist::auto_aim) {
-			ImGui::SliderFloat("Assist Radius", &ceaihack::config::features::aimassist::radius_start_correction, 1.5f, 3.0f);
-			ImGui::SliderFloat("Assist Power", &ceaihack::config::features::aimassist::power, 1, 100);
+			ImGui::SliderFloat("Assist Radius", &ceaihack::config::features::aimassist::radius_start_correction, 1.5f, 3.0f, "%.1f", 0.1f);
+			ImGui::SliderFloat("Assist Power", &ceaihack::config::features::aimassist::power, 1, 100, "%.0f", 1.f);
 #ifdef _DEBUG
 			ImGui::Checkbox("Show Predicted Position (DEBUG ONLY)", &ceaihack::config::features::aimassist::show_prediction);
 #endif
 		}
 		else {
-			ImGui::SliderFloat("Interpolation Time", &ceaihack::config::features::aimassist::auto_interp_time, 0.2f, 15.0f);
+			ImGui::SliderFloat("Interpolation Time", &ceaihack::config::features::aimassist::auto_interp_time, 0.2f, 15.0f, "%.1f", 0.1f);
 		}
 	}
 }
@@ -207,8 +207,8 @@ void ceaihack::cheat::ui::design::beatmap_debug() {
 
 		auto current_object = player->hom->get_current_object();
 
-		if (current_object != nullptr) {
-			ImGui::Text("CURRENT type %i, pos(%0.1f, %0.1f), start %i, end %i", current_object->type.get(), current_object->base_position.get().x, current_object->base_position.get().y, current_object->start_time.get(), current_object->end_time.get());
+		if (current_object.base != 0) {
+			ImGui::Text("CURRENT type %i, pos(%0.1f, %0.1f), start %i, end %i", current_object.type.get(), current_object.base_position.get().x, current_object.base_position.get().y, current_object.start_time.get(), current_object.end_time.get());
 		}
 		/*
 

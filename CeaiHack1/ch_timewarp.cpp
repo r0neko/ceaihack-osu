@@ -14,7 +14,10 @@ uintptr_t player_update_addy = NULL;
 
 void ceaihack::cheat::features::timewarp::init() {
 	player_update_addy = ceaihack::cheat::memory::search_pattern(ceaihack::cheat::signatures::player_update_signature, "xxxxxxxx????xxxx????x????xxxxxxxx????xx????xx????x");
+
+#ifdef _DEBUG
 	printf("TW: Player::Update @ %08X\n", player_update_addy);
+#endif
 }
 
 void patch_timewarp_check() {
