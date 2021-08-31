@@ -68,7 +68,7 @@ void ceaihack::cheat::ui::design::header() {
 		ImGui::Text("CeaiHack");
 		ImGui::PopFont();
 
-		ImGui::SameLine(0, -0.4f);
+		ImGui::SameLine(0.f, -0.4f);
 
 		ImGui::Text("for osu!");
 

@@ -241,6 +241,7 @@ void ceaihack::cheat::ui::on_frame(HDC context) {
 		ImGui::End();
 	}
 
+#ifdef _DEBUG
 	if (ceaihack::config::features::aimassist::enabled && ceaihack::config::features::aimassist::show_prediction) {
 		ImColor normal = ImColor(255, 0, 255, 100);
 		ImColor in_radius = ImColor(0, 255, 0);
@@ -273,6 +274,7 @@ void ceaihack::cheat::ui::on_frame(HDC context) {
 		ImGui::GetOverlayDrawList()->AddCircleFilled(ceaihack::cheat::features::aimassist::s_cursor_position.imvec(), 15, ImColor(255, 255, 0)); // og cursor position - YELLOW
 		ImGui::GetOverlayDrawList()->AddCircleFilled(cursor_pos, 15, in_object_radius ? in_radius : (in_corr_radius ? correction : normal)); // cursor position - RED
 	}
+#endif
 
 #endif
 
