@@ -14,7 +14,6 @@ namespace ceaihack::osu {
 
 		memptr_var<float> alpha;
 
-	private:
 		uintptr_t base = NULL;
 	};
 }

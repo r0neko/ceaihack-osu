@@ -20,7 +20,7 @@ namespace ceaihack::osu {
 		memptr_var<float> approach_rate;
 
 		memptr_var<ruleset_e> game_mode;
-	private:
+
 		uintptr_t base = NULL;
 	};
 }

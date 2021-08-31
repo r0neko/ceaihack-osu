@@ -18,7 +18,6 @@ namespace ceaihack::osu {
 		memptr_var<bool> is_hit;
 		memptr_var<vector2_t> base_position;
 
-	private:
 		uintptr_t base = NULL;
 	};
 }

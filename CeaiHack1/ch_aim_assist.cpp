@@ -40,7 +40,7 @@ vector2_t ceaihack::cheat::features::aimassist::calculate_point(vector2_t object
 	auto amplitude = 120;
 	auto power = 1.f / (2.f + ceaihack::config::features::aimassist::power) * amplitude;
 
-	float half_screen = min(screen_size.width, screen_size.height) / 2;
+	float half_screen = (float) min(screen_size.width, screen_size.height) / 2;
 	auto importance = powf(1.0f - min(1.0f, max(distance / half_screen, 0.0f)), power);
 
 
@@ -55,12 +55,12 @@ vector2_t ceaihack::cheat::features::aimassist::calculate_point(vector2_t object
 	return calculated_point;
 }
 
-void ceaihack::cheat::features::aimassist::perform_aim_correction(player* player, vector2_t pos) {
+void ceaihack::cheat::features::aimassist::perform_aim_correction(osu::player* player, vector2_t pos) {
 	cursor_position = pos;
 	auto out = player->hom->get_current_object();
 
-	if (out != nullptr) {
-		object_position = get_relative_pos_to_gamefield(out->base_position.get());
+	if (out.base != 0) {
+		object_position = get_relative_pos_to_gamefield(out.base_position.get());
 		object_radius = player->get_object_radius();
 		predicted_position = calculate_point(object_position, cursor_position);
 
@@ -69,12 +69,12 @@ void ceaihack::cheat::features::aimassist::perform_aim_correction(player* player
 		if (current_radius <= object_radius * ceaihack::config::features::aimassist::radius_start_correction && current_radius > object_radius) {
 			/*cursor_position = cursor_position.interpolate_to(predicted_position, ceaihack::cheat::clock::get_delta() * 0.35);*/
 			//cursor_position.interpolate_to(predicted_position, ceaihack::cheat::clock::get_delta() * 0.35);
-			cursor_position.interpolate_to(predicted_position, 0.35);
+			cursor_position.interpolate_to(predicted_position, 0.35f);
 		}
 	}
 }
 
-void ceaihack::cheat::features::aimassist::perform_auto_aim(player* player, vector2_t pos) {
+void ceaihack::cheat::features::aimassist::perform_auto_aim(osu::player* player, vector2_t pos) {
 	auto time = osu::gamebase::get_time();
 	auto delta = abs(time - old_d_time);
 	auto objects = player->hom->hit_objects;
@@ -90,7 +90,7 @@ void ceaihack::cheat::features::aimassist::perform_auto_aim(player* player, vect
 			auto preempt = player->hom->calc_preempt_time();
 			auto reaction_time = player->hom->apply_mods_to_rate(100);
 
-			int wait_time = max(0.0, preempt - reaction_time);
+			int wait_time = (int) max(0.0, preempt - reaction_time);
 
 			for (int i = 0; i < objects.length; i++) {
 				auto object = objects[i];

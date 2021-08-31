@@ -15,7 +15,7 @@ namespace ceaihack::osu {
 		sprite* s_lights_out;
 
 		sprite_manager* sprite_manager_flashlight;
-	private:
+
 		uintptr_t base = NULL;
 	};
 }

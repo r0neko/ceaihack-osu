@@ -13,4 +13,5 @@ namespace ceaihack::memory::location {
     inline void* set_cursor_pos;
     inline void* check_flashlight_hax;
     inline void* update_flashlight;
+    inline void* update_timing;
 }

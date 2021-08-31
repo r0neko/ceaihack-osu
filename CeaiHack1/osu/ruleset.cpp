@@ -6,8 +6,6 @@ using namespace ceaihack::osu;
 ruleset::ruleset(uintptr_t base_address) {
 	base = base_address;
 
-	printf("Ruleset @ %08X\n", base);
-
 	if (base == NULL) return;
 
 	// init sprites

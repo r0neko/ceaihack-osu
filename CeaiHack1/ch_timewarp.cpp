@@ -12,11 +12,16 @@
 
 uintptr_t player_update_addy = NULL;
 
+constexpr double sixty_frame_time = 16.666666666666668; // 1000.0f / 60.0f
+
 void ceaihack::cheat::features::timewarp::init() {
 	player_update_addy = ceaihack::cheat::memory::search_pattern(ceaihack::cheat::signatures::player_update_signature, "xxxxxxxx????xxxx????x????xxxxxxxx????xx????xx????x");
+#ifdef _DEBUG
 	printf("TW: Player::Update @ %08X\n", player_update_addy);
+#endif
 }
 
+// to do: fix
 void patch_timewarp_check() {
 	uintptr_t tw_check_location = player_update_addy + 0x142E;
 
@@ -34,22 +39,37 @@ void patch_timewarp_check() {
 	}
 }
 
+void patch_gamebase_update_timings() {
+	uintptr_t location = (uintptr_t)ceaihack::memory::location::update_timing;
+
+	auto new_frame_ms = sixty_frame_time;
+
+	if (ceaihack::config::features::timewarp::enabled && ceaihack::osu::player::is_instance())
+		new_frame_ms *= (1.0f / ceaihack::config::features::timewarp::rate);
+
+	uintptr_t frame_ms_1 = *(uintptr_t*)(location + 0x185),
+			  frame_ms_2 = *(uintptr_t*)(location + 0x1FC),
+			  frame_ms_3 = *(uintptr_t*)(location + 0x21C);
+
+	*(double*) frame_ms_1 = *(double*) frame_ms_2 = *(double*) frame_ms_3 = new_frame_ms;
+}
+
 void ceaihack::cheat::features::timewarp::update() {
 	// if it was not jitted yet just make sure to wait until a proper player instance has been found lol
-	if (player_update_addy == NULL && !osu::player::is_instance()) return;
-
 	// if a player instance exists and the pointer to the jitted function doesn't exist, we go and search for it(aka call init)
-	if (player_update_addy == NULL) {
+	if (player_update_addy == NULL && osu::player::is_instance()) {
 		ceaihack::cheat::memory::dmp_mem_regions();
 		init();
 	}
 
-	// if it still doesn't exist, just return out of this.
-	if (player_update_addy == NULL)
-		return;
+	// run what depends on player_update_addy.
+	if (player_update_addy != NULL) {
+		// patch the Timewarp check once and for all!
+		//patch_timewarp_check();
+	}
 
-	// now let the fun begin! patch the Timewarp check once and for all!
-	patch_timewarp_check();
+	// update gamebase timings to make better replays
+	patch_gamebase_update_timings();
 }
 
 void ceaihack::cheat::features::timewarp::unload() {
@@ -58,6 +78,7 @@ void ceaihack::cheat::features::timewarp::unload() {
 
 	// call the patcher one more time(yes, lazy).
 	patch_timewarp_check();
+	patch_gamebase_update_timings();
 }
 
 void __stdcall ceaihack::cheat::features::timewarp::rate_change_hook(double rate) {

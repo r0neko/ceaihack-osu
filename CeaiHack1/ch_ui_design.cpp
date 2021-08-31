@@ -35,6 +35,7 @@ void tab_button(std::string label, ui_tabs tab) {
 	bool do_pop = false;
 
 	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
+	ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0);
 
 	if (ceaihack::config::current_tab == tab) {
 		ImGui::PushStyleColor(ImGuiCol_Button, ceaihack::cheat::ui::color::tab_selected.Value);
@@ -46,7 +47,7 @@ void tab_button(std::string label, ui_tabs tab) {
 
 	if (do_pop)
 		ImGui::PopStyleColor(1);
-	ImGui::PopStyleVar(1);
+	ImGui::PopStyleVar(2);
 }
 
 void ceaihack::cheat::ui::design::tabs() {
@@ -67,7 +68,7 @@ void ceaihack::cheat::ui::design::header() {
 		ImGui::Text("CeaiHack");
 		ImGui::PopFont();
 
-		ImGui::SameLine(0, -0.4);
+		ImGui::SameLine(0, -0.4f);
 
 		ImGui::Text("for osu!");
 
@@ -89,7 +90,7 @@ void ceaihack::cheat::ui::design::timewarp() {
 	ImGui::Checkbox("Enable Timewarp", &ceaihack::config::features::timewarp::enabled);
 
 	if (ceaihack::config::features::timewarp::enabled)
-		ImGui::SliderFloat("Timewarp rate", &ceaihack::config::features::timewarp::rate, 0.2f, 1.5f);
+		ImGui::SliderFloat("Timewarp rate", &ceaihack::config::features::timewarp::rate, 0.2f, 1.5f, "%.1f", ImGuiSliderFlags_Logarithmic);
 }
 
 void ceaihack::cheat::ui::design::visuals() {
@@ -100,10 +101,10 @@ void ceaihack::cheat::ui::design::visuals() {
 	ImGui::Checkbox("Unmod Flashlight", &ceaihack::config::features::game_modifiers::unmod::flashlight);
 
 	ImGui::Checkbox("AR Modifier", &ceaihack::config::features::game_modifiers::approach_rate::enabled);
-	ImGui::SliderFloat("AR", &config::features::game_modifiers::approach_rate::new_value, 0, 15);
+	ImGui::SliderFloat("AR", &config::features::game_modifiers::approach_rate::new_value, 0, 15, "%.1f", ImGuiSliderFlags_Logarithmic);
 
 	ImGui::Checkbox("CS Modifier", &ceaihack::config::features::game_modifiers::circle_size::enabled);
-	ImGui::SliderFloat("CS", &config::features::game_modifiers::circle_size::new_value, 0, 10);
+	ImGui::SliderFloat("CS", &config::features::game_modifiers::circle_size::new_value, 0, 10, "%.1f", ImGuiSliderFlags_Logarithmic);
 }
 
 void ceaihack::cheat::ui::design::aim_assist() {
@@ -116,14 +117,14 @@ void ceaihack::cheat::ui::design::aim_assist() {
 	if (ceaihack::config::features::aimassist::enabled) {
 		ImGui::Checkbox("Auto-Aim (NOT RECOMMENDED!)", &ceaihack::config::features::aimassist::auto_aim);
 		if (!ceaihack::config::features::aimassist::auto_aim) {
-			ImGui::SliderFloat("Assist Radius", &ceaihack::config::features::aimassist::radius_start_correction, 1.5f, 3.0f);
-			ImGui::SliderFloat("Assist Power", &ceaihack::config::features::aimassist::power, 1, 100);
+			ImGui::SliderFloat("Assist Radius", &ceaihack::config::features::aimassist::radius_start_correction, 1.5f, 3.0f, "%.1f", ImGuiSliderFlags_Logarithmic);
+			ImGui::SliderFloat("Assist Power", &ceaihack::config::features::aimassist::power, 1, 100, "%.0f", ImGuiSliderFlags_Logarithmic);
 #ifdef _DEBUG
 			ImGui::Checkbox("Show Predicted Position (DEBUG ONLY)", &ceaihack::config::features::aimassist::show_prediction);
 #endif
 		}
 		else {
-			ImGui::SliderFloat("Interpolation Time", &ceaihack::config::features::aimassist::auto_interp_time, 0.2f, 15.0f);
+			ImGui::SliderFloat("Interpolation Time", &ceaihack::config::features::aimassist::auto_interp_time, 0.2f, 15.0f, "%.1f", ImGuiSliderFlags_Logarithmic);
 		}
 	}
 }
@@ -139,21 +140,15 @@ void ceaihack::cheat::ui::design::debug() {
 	ImGui::Text("Game is running at %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	ImGui::Text("Internal Clock: %lld", ceaihack::cheat::clock::get_current_time());
 
-	ImGui::Text("AudioEngine.Time = %i", ceaihack::cheat::memory::current_time.get());
+	ImGui::Text("AudioEngine.Time = %i", osu::gamebase::get_time());
 	ImGui::Text("GameBase.Time = %i", osu::gamebase::get_game_time());
-
-	ImGui::Text("Current game state - %i", ceaihack::cheat::memory::get_current_state());
-	ImGui::Text("IsPlayerLoaded - %i", ceaihack::cheat::memory::is_player_loaded());
 
 	screen_t s = utils::get_screen();
 	ImGui::Text("Screen Resolution - %ix%i", s.width, s.height);
 	
 	if (ceaihack::osu::player::is_instance()) {
-		vector2_t pos = ceaihack::cheat::memory::get_cursor_position();
-		ImGui::Text("Cursor position: %f, %f", pos.x, pos.y);
-
-		beatmap_t beatmap = ceaihack::cheat::memory::get_loaded_beatmap();
-		ImGui::Text("Current beatmap: mode %i, AR %.2f, CS %.2f, OD %.2f, HP %.2F", beatmap.mode, beatmap.ar, beatmap.cs, beatmap.od, beatmap.hp);
+		auto beatmap = ceaihack::osu::player::instance()->hom->beatmap;
+		ImGui::Text("Current beatmap: mode %i, AR %.2f, CS %.2f, OD %.2f, HP %.2F", beatmap->game_mode, beatmap->approach_rate, beatmap->circle_size, beatmap->overall_diff, beatmap->drain_rate);
 	}
 
 	if (b_show_offsets) {
@@ -196,8 +191,8 @@ void ceaihack::cheat::ui::design::beatmap_debug() {
 			return;
 		}
 
-		ImGui::Text("Mods: %i | Rate: %0.2f", player->hom->active_mods.get(), ceaihack::cheat::memory::get_current_rate());
-		ImGui::Text("Time: %i", ceaihack::cheat::memory::current_time.get());
+		ImGui::Text("Mods: %i", player->hom->active_mods.get());
+		ImGui::Text("Time: %i", osu::gamebase::get_time());
 
 		ImGui::Text("AR: %.2f, CS: %.2f, HP: %.2f, OD: %.2f", player->hom->beatmap->approach_rate.get(), player->hom->beatmap->circle_size.get(), player->hom->beatmap->drain_rate.get(), player->hom->beatmap->overall_diff.get());
 
@@ -207,8 +202,8 @@ void ceaihack::cheat::ui::design::beatmap_debug() {
 
 		auto current_object = player->hom->get_current_object();
 
-		if (current_object != nullptr) {
-			ImGui::Text("CURRENT type %i, pos(%0.1f, %0.1f), start %i, end %i", current_object->type.get(), current_object->base_position.get().x, current_object->base_position.get().y, current_object->start_time.get(), current_object->end_time.get());
+		if (current_object.base != 0) {
+			ImGui::Text("CURRENT type %i, pos(%0.1f, %0.1f), start %i, end %i", current_object.type.get(), current_object.base_position.get().x, current_object.base_position.get().y, current_object.start_time.get(), current_object.end_time.get());
 		}
 		/*
 

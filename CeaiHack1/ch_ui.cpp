@@ -55,6 +55,7 @@ void get_style() {
 	Style.Colors[ImGuiCol_Button] = ceaihack::cheat::ui::color::button_color.Value;
 
 	Style.WindowRounding = 5.2f;
+	Style.FrameRounding = 12;
 }
 
 void ceaihack::cheat::ui::init(HDC context) {
@@ -153,8 +154,8 @@ void draw_not_auth_prompt() {
 
 		ImGui::Spacing();
 
-		int total_w = ImGui::GetContentRegionAvail().x;
-		ImGui::SameLine(total_w - 21);
+		float total_w = ImGui::GetContentRegionAvail().x;
+		ImGui::SameLine(total_w - 21.f);
 
 		if (ImGui::Button("OK")) {
 			ceaihack::config::is_running = false;
@@ -197,11 +198,12 @@ void draw() {
 
 			ImGui::PushStyleColor(ImGuiCol_FrameBg, ceaihack::cheat::ui::color::background_content.Value);
 			ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(15.0f, 10.0f));
+			ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 0);
 
 			ImGui::BeginChildFrame(3, ImVec2(0.0f, 0.0f));
 			{
 				ImGui::PopStyleColor(); // retard moment again ok
-				ImGui::PopStyleVar(); // another retard moment again ok
+				ImGui::PopStyleVar(2); // another retard moment again ok
 				ceaihack::cheat::ui::render_tab();
 			}
 			ImGui::EndChildFrame();
@@ -238,7 +240,6 @@ void ceaihack::cheat::ui::on_frame(HDC context) {
 		ceaihack::cheat::ui::design::beatmap_debug();
 		ImGui::End();
 	}
-#endif
 
 	if (ceaihack::config::features::aimassist::enabled && ceaihack::config::features::aimassist::show_prediction) {
 		ImColor normal = ImColor(255, 0, 255, 100);
@@ -272,6 +273,8 @@ void ceaihack::cheat::ui::on_frame(HDC context) {
 		ImGui::GetOverlayDrawList()->AddCircleFilled(ceaihack::cheat::features::aimassist::s_cursor_position.imvec(), 15, ImColor(255, 255, 0)); // og cursor position - YELLOW
 		ImGui::GetOverlayDrawList()->AddCircleFilled(cursor_pos, 15, in_object_radius ? in_radius : (in_corr_radius ? correction : normal)); // cursor position - RED
 	}
+
+#endif
 
 	ImGui::EndFrame();
 	ImGui::Render();

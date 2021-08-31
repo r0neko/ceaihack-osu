@@ -23,7 +23,7 @@ namespace ceaihack::osu {
 
 		static std::unique_ptr<player> instance();
 		static bool is_instance();
-	private:
+
 		uintptr_t base = NULL;
 	};
 }

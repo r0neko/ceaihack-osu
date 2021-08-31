@@ -36,7 +36,7 @@ float hit_object_manager::calc_preempt_time() {
 
 float hit_object_manager::map_difficulty_range(float difficulty, float min, float mid, float max)
 {
-	auto d = apply_difficulty(difficulty, 1.4);
+	auto d = apply_difficulty(difficulty, 1.4f);
 
 	if (d > 5)
 		return mid + (max - mid) * (d - 5) / 5;
@@ -48,15 +48,15 @@ float hit_object_manager::map_difficulty_range(float difficulty, float min, floa
 float hit_object_manager::apply_mods_to_rate(double rate) {
 	auto mods = active_mods.get();
 
-	if (mods & (int)mod_e::double_time) return rate * 1.5f;
-	else if (mods & (int)mod_e::double_time) return rate * .75f;
-	else return rate;
+	if (mods & (int) mod_e::double_time) return (float) rate * 1.5f;
+	else if (mods & (int) mod_e::double_time) return (float) rate * .75f;
+	else return (float) rate;
 }
 
-hit_object* hit_object_manager::get_current_object() {
+hit_object hit_object_manager::get_current_object() {
 	if (hit_objects.is_valid()) {
-		auto time = osu::gamebase::get_time();
-		auto preempt = calc_preempt_time();
+		const auto time = osu::gamebase::get_time();
+		const auto preempt = calc_preempt_time();
 
 		for (int i = 0; i < hit_objects.length; i++) {
 			auto object = hit_objects[i];
@@ -64,9 +64,9 @@ hit_object* hit_object_manager::get_current_object() {
 			if (object.is_hit.get() || time > object.end_time.get()) continue; // if our current time is past the current object time, we continue, just to save time.
 
 			if (time >= (object.start_time.get() - preempt) && time <= object.end_time.get()) // check if time is in the [start - preempt; end] interval.
-				return &object;
+				return object;
 		}
 	}
 
-	return nullptr;
+	return { 0 };
 }

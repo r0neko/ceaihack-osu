@@ -21,8 +21,10 @@ void ceaihack::cheat::features::unmod::flashlight::update() {
 		if (ceaihack::memory::location::update_flashlight == NULL)
 			ceaihack::memory::location::update_flashlight = (void*) ceaihack::cheat::memory::search_pattern(ceaihack::cheat::signatures::ruleset_osu_update_flashlight_signature, "xxxxxxxxxxx");
 
+#ifdef _DEBUG
 		printf("FL: CheckFlashlightHax @ %08x\n", (uintptr_t) ceaihack::memory::location::check_flashlight_hax);
-		printf("FL: UpdateFlashlight @ %08x\n", (uintptr_t)ceaihack::memory::location::update_flashlight);
+		printf("FL: UpdateFlashlight @ %08x\n", (uintptr_t) ceaihack::memory::location::update_flashlight);
+#endif
 	}
 
 	// hook checkFlashlightHax
@@ -52,7 +54,6 @@ void __fastcall ceaihack::cheat::features::unmod::flashlight::update_flashlight_
 	// fl unmod code happens here
 	if (ceaihack::osu::player::is_instance()) {
 		auto player = ceaihack::osu::player::instance();
-
 
 		if (player->ruleset != nullptr && player->ruleset->sprite_manager_flashlight != nullptr) {
 			player->ruleset->sprite_manager_flashlight->alpha = (float) !ceaihack::config::features::game_modifiers::unmod::flashlight; // lazy lol just convert bool to float easy deal!

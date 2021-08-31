@@ -29,17 +29,17 @@ DWORD WINAPI ceaihack::cheat::init(LPVOID lpParam) {
 	ceaihack::cheat::auth::init();
 
 	// init features
-	ceaihack::cheat::features::game_modifier::init();
+	//ceaihack::cheat::features::game_modifier::init();
 	ceaihack::cheat::features::timewarp::init();
 
 	while (ceaihack::config::is_running) {
 		ceaihack::cheat::features::timewarp::update();
-		ceaihack::cheat::features::game_modifier::update();
-		ceaihack::cheat::features::unmod::flashlight::update();
+		//ceaihack::cheat::features::game_modifier::update();
+		//ceaihack::cheat::features::unmod::flashlight::update();
 	}
 
 	// unload features
-	ceaihack::cheat::features::game_modifier::unload();
+	//ceaihack::cheat::features::game_modifier::unload();
 	ceaihack::cheat::features::timewarp::unload();
 
 	ceaihack::hooks::unload();
