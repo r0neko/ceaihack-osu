@@ -167,6 +167,9 @@
     <ClCompile Include="osu\sprite_manager.cpp">
       <Filter>osu!\SpriteManager</Filter>
     </ClCompile>
+    <ClCompile Include="ch_color_logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ch.h">
@@ -307,5 +310,6 @@
     <ClInclude Include="osu\sprite_manager.h">
       <Filter>osu!\SpriteManager</Filter>
     </ClInclude>
+    <ClInclude Include="ch_color_logger.h" />
   </ItemGroup>
 </Project>

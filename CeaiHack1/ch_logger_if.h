@@ -10,6 +10,8 @@ enum log_level {
 
 class ch_logger_interface {
 public:
+   ch_logger_interface() = default;
+
     ch_logger_interface(std::string tag) {
         this->tag = tag;
     }

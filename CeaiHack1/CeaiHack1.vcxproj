@@ -180,6 +180,7 @@
     <ClCompile Include="ch_aim_assist.cpp" />
     <ClCompile Include="ch_auth.cpp" />
     <ClCompile Include="ch_clock.cpp" />
+    <ClCompile Include="ch_color_logger.cpp" />
     <ClCompile Include="ch_game_modifier.cpp" />
     <ClCompile Include="ch_hooks.cpp" />
     <ClCompile Include="ch_logger.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="ch_aim_assist.h" />
     <ClInclude Include="ch_auth.h" />
     <ClInclude Include="ch_clock.h" />
+    <ClInclude Include="ch_color_logger.h" />
     <ClInclude Include="ch_config.h" />
     <ClInclude Include="ch_game_modifier.h" />
     <ClInclude Include="ch_game_signature.h" />
