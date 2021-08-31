@@ -3,7 +3,7 @@
 #include <iostream>
 
 namespace ceaihack::cheat {
-	DWORD WINAPI init(LPVOID lpParam);
+   DWORD WINAPI init( LPVOID lpParam );
 
-	inline HMODULE hModule;
-}
+   inline HMODULE hModule;
+} // namespace ceaihack::cheat

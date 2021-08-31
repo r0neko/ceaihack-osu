@@ -2,9 +2,9 @@
 #include <Windows.h>
 
 namespace ceaihack::hooks {
-	bool init();
-	void unload();
+   bool init();
+   void unload();
 
-	// detours
-	bool __stdcall swap_buffers(HDC context);
-}
+   // detours
+   bool __stdcall swap_buffers( HDC context );
+} // namespace ceaihack::hooks

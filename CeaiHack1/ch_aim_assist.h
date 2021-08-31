@@ -1,7 +1,7 @@
 ﻿#pragma once
-#include "vector2.h"
-#include "ch_hooks_vars.h"
 #include "./osu/osu.h"
+#include "ch_hooks_vars.h"
+#include "vector2.h"
 
 // kat.— Today at 12:00 PM
 // @r0neko
@@ -10,18 +10,18 @@
 // closer = higher
 
 namespace ceaihack::cheat::features::aimassist {
-	void update();
-	void __fastcall set_cursor_position_hook(void* ecx, void* edx, vector2_t pos);
+   void update();
+   void __fastcall set_cursor_position_hook( void *ecx, void *edx, vector2_t pos );
 
-	vector2_t calculate_point(vector2_t object, vector2_t cursor);
+   vector2_t calculate_point( vector2_t object, vector2_t cursor );
 
-	inline vector2_t cursor_position = vector2_t(0.0f);
-	inline vector2_t s_cursor_position = vector2_t(0.0f);
-	inline vector2_t object_position = vector2_t(0.0f);
-	inline vector2_t predicted_position = vector2_t(0.0f);
+   inline vector2_t cursor_position    = vector2_t( 0.0f );
+   inline vector2_t s_cursor_position  = vector2_t( 0.0f );
+   inline vector2_t object_position    = vector2_t( 0.0f );
+   inline vector2_t predicted_position = vector2_t( 0.0f );
 
-	inline float object_radius = 10;
+   inline float object_radius = 10;
 
-	void perform_aim_correction(ceaihack::osu::player* player, vector2_t pos);
-	void perform_auto_aim(ceaihack::osu::player* player, vector2_t pos);
-}
+   void perform_aim_correction( ceaihack::osu::player *player, vector2_t pos );
+   void perform_auto_aim( ceaihack::osu::player *player, vector2_t pos );
+} // namespace ceaihack::cheat::features::aimassist

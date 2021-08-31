@@ -2,8 +2,8 @@
 #include "spdlog/spdlog.h"
 
 namespace ceaihack::logger {
-	void init();
+   void init();
 
-	inline std::shared_ptr<spdlog::logger> cheat;
-	inline std::shared_ptr<spdlog::logger> features;
-}
+   inline std::shared_ptr<spdlog::logger> cheat;
+   inline std::shared_ptr<spdlog::logger> features;
+} // namespace ceaihack::logger

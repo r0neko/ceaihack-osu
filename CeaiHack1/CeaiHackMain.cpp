@@ -1,26 +1,21 @@
 #include "ch.h"
 
-BOOL APIENTRY DllMain( HMODULE hModule,
-                       DWORD  reason,
-                       LPVOID lpReserved
-                     )
-{
-    if (reason == DLL_PROCESS_ATTACH) {
-		// alloc a console
-		AllocConsole();
+BOOL APIENTRY DllMain( HMODULE hModule, DWORD reason, LPVOID lpReserved ) {
+   if ( reason == DLL_PROCESS_ATTACH ) {
+      // alloc a console
+      AllocConsole();
 
-		// setup console IO
-		freopen_s((FILE**)stderr, "CONOUT$", "w", stderr);
-		freopen_s((FILE**)stdout, "CONOUT$", "w", stdout);
+      // setup console IO
+      freopen_s( (FILE **) stderr, "CONOUT$", "w", stderr );
+      freopen_s( (FILE **) stdout, "CONOUT$", "w", stdout );
 
-		// set title
-		SetConsoleTitle(L"CeaiHack Debug Console");
+      // set title
+      SetConsoleTitle( L"CeaiHack Debug Console" );
 
-        ceaihack::cheat::hModule = hModule;
-        CreateThread(nullptr, 0, &ceaihack::cheat::init, nullptr, 0, nullptr);
-        DisableThreadLibraryCalls(hModule);
-    }
+      ceaihack::cheat::hModule = hModule;
+      CreateThread( nullptr, 0, &ceaihack::cheat::init, nullptr, 0, nullptr );
+      DisableThreadLibraryCalls( hModule );
+   }
 
-    return 1;
+   return 1;
 }
-
