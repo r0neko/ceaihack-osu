@@ -75,7 +75,8 @@ void ceaihack::cheat::ui::init( HDC context ) {
    ImGuiIO &IO = ImGui::GetIO();
    // text font
    IO.Fonts->AddFontFromFileTTF( "C:\\Windows\\Fonts\\Arial.ttf", 16.0F, NULL );
-   font_logo  = IO.Fonts->AddFontFromFileTTF( "C:\\Users\\alex\\AppData\\Local\\Microsoft\\Windows\\Fonts\\SamsungSharpSans-Bold.ttf", 23.0F, NULL );
+
+   font_logo  = IO.Fonts->AddFontFromFileTTF( "C:\\Windows\\Fonts\\Arial.ttf", 23.0F, NULL );
    font_title = IO.Fonts->AddFontFromFileTTF( "C:\\Windows\\Fonts\\Arial.ttf", 25.0F, NULL );
 
    IO.IniFilename                       = nullptr;
@@ -273,21 +274,21 @@ void ceaihack::cheat::ui::on_frame( HDC context ) {
           ceaihack::cheat::features::aimassist::object_radius * ceaihack::config::features::aimassist::radius_start_correction,
           ceaihack::cheat::features::aimassist::object_radius );
 
-      ImGui::GetOverlayDrawList()->AddCircleFilled(
+      ImGui::GetBackgroundDrawList()->AddCircleFilled(
           object_pos,
           ceaihack::cheat::features::aimassist::object_radius * ceaihack::config::features::aimassist::radius_start_correction,
           ImColor( 0, 255, 255, 100 ) ); // aim correction point - CYAN
-      ImGui::GetOverlayDrawList()->AddCircleFilled(
+      ImGui::GetBackgroundDrawList()->AddCircleFilled(
           object_pos, ceaihack::cheat::features::aimassist::object_radius, ImColor( 0, 255, 0, 100 ) ); // object radius - GREEN
 
-      ImGui::GetOverlayDrawList()->AddCircleFilled(
+      ImGui::GetBackgroundDrawList()->AddCircleFilled(
           ceaihack::cheat::features::aimassist::predicted_position.imvec(), 15, ImColor( 100, 100, 100 ) ); // cursor position - RED
 
-      ImGui::GetOverlayDrawList()->AddText( text_pos, ImColor( 255, 255, 255 ), tmp );
-      ImGui::GetOverlayDrawList()->AddLine( cursor_pos, object_pos, in_object_radius ? in_radius : ( in_corr_radius ? correction : normal ), 5 );
-      ImGui::GetOverlayDrawList()->AddCircleFilled(
+      ImGui::GetBackgroundDrawList()->AddText( text_pos, ImColor( 255, 255, 255 ), tmp );
+      ImGui::GetBackgroundDrawList()->AddLine( cursor_pos, object_pos, in_object_radius ? in_radius : ( in_corr_radius ? correction : normal ), 5 );
+      ImGui::GetBackgroundDrawList()->AddCircleFilled(
           ceaihack::cheat::features::aimassist::s_cursor_position.imvec(), 15, ImColor( 255, 255, 0 ) ); // og cursor position - YELLOW
-      ImGui::GetOverlayDrawList()->AddCircleFilled(
+      ImGui::GetBackgroundDrawList()->AddCircleFilled(
           cursor_pos, 15, in_object_radius ? in_radius : ( in_corr_radius ? correction : normal ) ); // cursor position - RED
    }
 #endif

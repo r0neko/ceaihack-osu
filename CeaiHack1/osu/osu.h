@@ -6,7 +6,7 @@
 #include "game_base.h"
 #include "window_utils.h"
 
-// notes for shitneko
+// notes for me
 // [from where]
 // what to get
 // 

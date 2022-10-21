@@ -4,7 +4,7 @@
 // here i am being a retard and pasting it
 // no, I didn't do the madoka library because i'm a retard
 // note to future self if they see this cheat: retard i hope you learned to code shit this time
-// ~ r0neko, 29/07/2021, somewhere at 12:30PM Romanian Time
+// ~ x_k0tori, 29/07/2021, somewhere at 12:30PM Romanian Time
 
 #include "app_domain/ch_app_domain.h"
 

@@ -24,7 +24,7 @@ void ceaihack::cheat::features::timewarp::init() {
 
 // to do: fix
 void patch_timewarp_check() {
-   uintptr_t tw_check_location = player_update_addy + 0x142E;
+   uintptr_t tw_check_location = player_update_addy + 0x142C;
 
    if ( ceaihack::config::features::timewarp::enabled ) {
       if ( *(uint16_t *) ( tw_check_location ) != 0xE990 ) {
@@ -65,7 +65,7 @@ void ceaihack::cheat::features::timewarp::update() {
    // run what depends on player_update_addy.
    if ( player_update_addy != NULL ) {
       // patch the Timewarp check once and for all!
-      // patch_timewarp_check();
+      patch_timewarp_check();
    }
 
    // update gamebase timings to make better replays

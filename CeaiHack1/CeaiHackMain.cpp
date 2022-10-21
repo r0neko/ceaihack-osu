@@ -2,6 +2,7 @@
 
 BOOL APIENTRY DllMain( HMODULE hModule, DWORD reason, LPVOID lpReserved ) {
    if ( reason == DLL_PROCESS_ATTACH ) {
+#ifdef _DEBUG
       // alloc a console
       AllocConsole();
 
@@ -11,6 +12,8 @@ BOOL APIENTRY DllMain( HMODULE hModule, DWORD reason, LPVOID lpReserved ) {
 
       // set title
       SetConsoleTitle( L"CeaiHack Debug Console" );
+
+#endif
 
       ceaihack::cheat::hModule = hModule;
       CreateThread( nullptr, 0, &ceaihack::cheat::init, nullptr, 0, nullptr );

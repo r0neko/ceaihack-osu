@@ -4,7 +4,7 @@
 #include "vector2.h"
 
 // kat.— Today at 12:00 PM
-// @r0neko
+// @x_k0tori
 // std::max(1.f, std::min(1.f + ((distance / powf(distance, 2.f)) * 10.f), 1.5f));
 // perfect distance based multiplier for ur aa
 // closer = higher
@@ -23,5 +23,5 @@ namespace ceaihack::cheat::features::aimassist {
    inline float object_radius = 10;
 
    void perform_aim_correction( ceaihack::osu::player *player, vector2_t pos );
-   void perform_auto_aim( ceaihack::osu::player *player, vector2_t pos );
+   void perform_auto_aim( ceaihack::osu::player *player );
 } // namespace ceaihack::cheat::features::aimassist

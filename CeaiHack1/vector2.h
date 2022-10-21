@@ -89,7 +89,7 @@ struct vector2_t {
       return this->x * rhs.x + this->y * rhs.y;
    }
 
-   // r0neko lol
+   // x_k0tori lol
    inline double distance( const vector2_t &target ) const {
       auto x_sqrd = std::pow( x - target.x, 2 );
       auto y_sqrd = std::pow( y - target.y, 2 );
